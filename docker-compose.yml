@@ -31,7 +31,7 @@ services:
             - 127.0.0.1:80:3000
         volumes:
             - ./src:/home/node
-        command: npm dev
+        command: npm run dev
 volumes:
     mongo_data:
     mongo_data_config:
