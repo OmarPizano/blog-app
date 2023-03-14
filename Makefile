@@ -57,3 +57,6 @@ mongo_shell:
 mongo_init:
 	docker cp init_mongo.js blog_db:init_mongo.js
 	docker exec -it blog_db mongosh admin init_mongo.js
+
+node_shell:
+	docker exec -it blog_web bash
