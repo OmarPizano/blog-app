@@ -24,7 +24,9 @@ npm_install:
 
 clean_modules:
 	rm -rf ./$(NODE_APP_LOCAL_DIR)/node_modules/*
+	rm -rf ./$(NODE_APP_LOCAL_DIR)/node_modules/.*
 	rm -f ./$(NODE_APP_LOCAL_DIR)/package-lock.json
+	rm -rf ./$(NODE_APP_LOCAL_DIR)/.npm
 
 start_server:
 	docker compose up -d
@@ -43,3 +45,6 @@ stop_server:
 
 stop_server_rm_volumes:
 	docker compose down -v
+
+mongo_shell:
+	docker exec -it blog_db mongosh
