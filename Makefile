@@ -28,10 +28,10 @@ clean_modules:
 	rm -f ./$(NODE_APP_LOCAL_DIR)/package-lock.json
 	rm -rf ./$(NODE_APP_LOCAL_DIR)/.npm
 
-start_server:
+start:
 	docker compose up -d
 
-start_server_build:
+startbuild:
 	docker compose up -d --build
 
 logs_web:
@@ -40,11 +40,20 @@ logs_web:
 logs_db:
 	docker logs blog_db
 
-stop_server:
+restart:
+	docker compose down
+	docker compose up -d
+
+stop:
 	docker compose down
 
-stop_server_rm_volumes:
+stop_clean:
 	docker compose down -v
+	docker rmi blog_web
 
 mongo_shell:
 	docker exec -it blog_db mongosh
+
+mongo_init:
+	docker cp init_mongo.js blog_db:init_mongo.js
+	docker exec -it blog_db mongosh admin init_mongo.js
