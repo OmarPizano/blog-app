@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const { nanoid } = require('nanoid');
 
 exports.getAllPosts = async (req, res) => {
     try {
@@ -37,6 +38,7 @@ exports.editPost = async (req, res) => {
 
 exports.addPost = async (req, res) => {
     const post = new Post(req.body);
+    post._id = nanoid(6); 
     let date = new Date();
     post.date = `${date.getFullYear()}/${"0" + String(date.getMonth() + 1).slice(-2)}/${("0" + date.getDate()).slice(-2)}`;
     try {
