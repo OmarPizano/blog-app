@@ -51,7 +51,7 @@ exports.updatePost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
     try {
-        const post = await Post.findByIdAndRemove(req.params.id);
+        const post = await Post.findByIdAndDelete(req.params.id);
         if (post !== null) {
             res.json({status: true, info: 'OK', data: post});
         } else {
