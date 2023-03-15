@@ -22,4 +22,8 @@ router.post('/add', (req, res) => {
     blog.addPost(req, res);
 });
 
+router.get('*', (req, res) => {
+    res.json({status: false, info: 'INVALID ROUTE', data: []});
+});
+
 module.exports = router;
