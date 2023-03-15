@@ -4,60 +4,60 @@ const { nanoid } = require('nanoid');
 exports.getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find()
-        res.json({status: true, info: 'OK', data: posts});
+        res.status(200).json(posts);
     } catch (error) {
-        res.json({status: false, info: error.message, data: []});
+        res.status(500).json(error);
     }
 };
 
 exports.getPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if (post !== null) {
-            res.json({status: true, info: 'OK', data: post});
+        if (!post) {
+            res.sendStatus(404);
         } else {
-            res.json({status: false, info: 'NOT FOUND', data: []});
+            res.status(200).json(post);
         }
     } catch (error) {
-        res.json({status: false, info: error.message, data: []});
+        res.status(500).json(error);
     }
 }
 
 exports.createPost = async (req, res) => {
-    const post = new Post(req.body);
-    post._id = nanoid(6); 
+    const new_post = new Post(req.body);
+    new_post._id = nanoid(6); 
     let date = new Date();
-    post.date = `${date.getFullYear()}/${"0" + String(date.getMonth() + 1).slice(-2)}/${("0" + date.getDate()).slice(-2)}`;
+    new_post.date = `${date.getFullYear()}/${"0" + String(date.getMonth() + 1).slice(-2)}/${("0" + date.getDate()).slice(-2)}`;
     try {
-        await post.save();
-        res.json({status: true, info: 'OK', data: post});
+        await new_post.save();
+        res.sendStatus(201);
     } catch (error) {
-        res.json({status: false, info: error.message, data: []});
+        res.status(500).json(error);
     }
 };
 
 exports.updatePost = async (req, res) => {
     try {
-        const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        if (post !== null) {
-            res.json({status: true, info: 'OK', data: post});
+        const updated_post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if (!updated_post) {
+            res.sendStatus(404);
         } else {
-            res.json({status: false, info: 'NOT FOUND', data: []});
+            res.sendStatus(204);
         }
     } catch (error) {
-        res.json({status: false, info: error.message, data: []});
+        res.status(500).json(error);
     }
 }
 
 exports.deletePost = async (req, res) => {
     try {
-        const post = await Post.findByIdAndDelete(req.params.id);
-        if (post !== null) {
-            res.json({status: true, info: 'OK', data: post});
+        const deleted_post = await Post.findByIdAndDelete(req.params.id);
+        if (!deleted_post) {
+            res.sendStatus(404);
         } else {
-            res.json({status: false, info: 'NOT FOUND', data: []});
+            res.sendStatus(204);
         }
     } catch (error) {
-        res.json({status: false, info: error.message, data: []});
+        res.status(500).json(error);
     }
 }

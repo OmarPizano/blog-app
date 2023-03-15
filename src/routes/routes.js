@@ -23,7 +23,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.get('*', (req, res) => {
-    res.json({status: false, info: 'INVALID ROUTE', data: []});
+    res.sendStatus(404);
 });
 
 module.exports = router;
