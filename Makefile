@@ -60,3 +60,4 @@ mongo_init:
 
 node_shell:
 	docker exec -it blog_web bash
+	rm src/.bash_history
