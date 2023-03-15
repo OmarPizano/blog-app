@@ -1,8 +1,11 @@
 <h1>Blog</h1>
-<form action="/addpost" method="POST">
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title">
-    <label for="content">Content</label>
-    <input type="text" name="content" id="content">
-    <input type="submit" value="Add Post">
-</form>
+
+<a href="/add">Agregar publicación</a>
+
+<h2>Publicaciones Actuales</h2>
+
+<% posts.forEach( post => { %>
+    <hr>
+    <a href="/post/<%= post._id %>""><h3><%= post.title %></h3></a>
+    <p><i><%= post.content %></i></p>
+<% }); %>

@@ -1,0 +1,30 @@
+<h1>Blog</h1>
+<% if (typeof post !== 'undefined') { %>
+<h2>Editar Publicación</h2>
+<form action="/edit/<%= post._id %>" method="POST">
+    <label for="title">Title</label>
+    <br>
+    <input type="text" name="title" id="title" value="<%= post.title %>">
+    <br>
+    <label for="content">Content</label>
+    <br>
+    <textarea name="content" id="content" cols="60" rows="10"><%= post.content %></textarea>
+    <br>
+    <input type="submit" value="Edit Post">
+</form>
+<% } else { %>
+<h2>Agregar Publicación</h2>
+<form action="/add" method="POST">
+    <label for="title">Title</label>
+    <br>
+    <input type="text" name="title" id="title">
+    <br>
+    <label for="content">Content</label>
+    <br>
+    <textarea name="content" id="content" cols="60" rows="10"></textarea>
+    <br>
+    <input type="submit" value="Add Post">
+</form>
+
+<% }; %>
+<a href="/">Cancelar</a>
