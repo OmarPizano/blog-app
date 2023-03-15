@@ -5,7 +5,6 @@ const db = require('./config/db');
 const routes = require('./routes/routes');
 const port = process.env.NODE_PORT;
 
-app.engine('html', require('ejs').renderFile);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
