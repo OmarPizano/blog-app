@@ -2,14 +2,14 @@
 
 Prototipo de un blog con Node.js y MongoDB.
 
-## Estructura de archivos
-...
-
 ## Modo de uso
-...
 
+...
 
 ## Changelog
 
+- **15/03/2023**: *Inicio del proyecto*
+	- Agregar funciones básicas de CRUD para los posts.
 - **14/03/2023**: *Inicio del proyecto*
 	- Estructura de directorios del proyecto.
+	- Pruebas de funcionamiento.
