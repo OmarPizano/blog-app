@@ -37,6 +37,8 @@ exports.editPost = async (req, res) => {
 
 exports.addPost = async (req, res) => {
     const post = new Post(req.body);
+    let date = new Date();
+    post.date = `${date.getFullYear()}/${"0" + String(date.getMonth() + 1).slice(-2)}/${("0" + date.getDate()).slice(-2)}`;
     try {
         await post.save();
         res.json({status: true, info: 'OK', data: post});
