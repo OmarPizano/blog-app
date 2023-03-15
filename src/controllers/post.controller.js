@@ -24,7 +24,7 @@ exports.getPost = async (req, res) => {
 
 exports.editPost = async (req, res) => {
     try {
-        const post = await Post.findByIdAndUpdate(req.params.id, {title: req.body.title, content: req.body.content});
+        const post = await Post.findByIdAndUpdate(req.params.id, req.body);
         if (post !== null) {
             res.json({status: true, info: 'OK', data: post});
         } else {
