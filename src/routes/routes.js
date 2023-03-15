@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     blog.index(req, res);
 })
 
+router.post('/addpost', (req, res) => {
+    blog.addPost(req, res);
+})
+
 module.exports = router;
