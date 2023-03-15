@@ -3,10 +3,10 @@ const { nanoid } = require('nanoid');
 
 exports.getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find()
+        const posts = await Post.find();
         res.status(200).json(posts);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -19,7 +19,7 @@ exports.getPost = async (req, res) => {
             res.status(200).json(post);
         }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 }
 
@@ -32,7 +32,7 @@ exports.createPost = async (req, res) => {
         await new_post.save();
         res.sendStatus(201);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -45,7 +45,7 @@ exports.updatePost = async (req, res) => {
             res.sendStatus(204);
         }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 }
 
@@ -58,6 +58,6 @@ exports.deletePost = async (req, res) => {
             res.sendStatus(204);
         }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: error.message });
     }
 }
