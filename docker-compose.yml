@@ -3,10 +3,6 @@ services:
     database:
         container_name: blog_db
         image: mongo
-        env_file: .env
-        environment:
-            - MONGO_INITDB_ROOT_USERNAME = $MONGO_USERNAME
-            - MONGO_INITDB_ROOT_PASSWORD = $MONGO_PASSWORD
         ports:
             - 127.0.0.1:27017:27017
         volumes:
@@ -19,15 +15,12 @@ services:
             dockerfile: Dockerfile
         env_file: .env
         environment:
-            - MONGO_USERNAME=$MONGO_USERNAME
-            - MONGO_PASSWORD=$MONGO_PASSWORD
-            - MONGO_HOSTNAME=$MONGO_HOSTNAME
-            - MONGO_PORT=$MONGO_PORT
-            - MONGO_DB=$MONGO_DB
+            - MONGO_URI=$MONGO_URI
+            - NODE_PORT=$NODE_PORT
         depends_on:
             - database
         ports:
-            - 127.0.0.1:80:3000
+            - 127.0.0.1:80:$NODE_PORT
         volumes:
             - ./src:/home/node
         command: npm run dev

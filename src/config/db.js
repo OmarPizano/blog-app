@@ -1,20 +1,11 @@
 const mongoose = require('mongoose');
-
-const {
-    MONGO_USERNAME,
-    MONGO_PASSWORD,
-    MONGO_HOSTNAME,
-    MONGO_PORT,
-    MONGO_DB
-} = process.env
-
-const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+const MONGO_URI = require('./config').MONGO_URI;
 
 const options = {
     useNewUrlParser: true,
 };
 
-mongoose.connect(url, options).then(
+mongoose.connect(MONGO_URI, options).then(
     function () {
         console.log('-- DATABASE CONNECTED --');
     }

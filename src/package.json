@@ -2,9 +2,9 @@
   "name": "blog",
   "version": "0.0.1",
   "description": "Prototipo de blog.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "OmarPizano",
