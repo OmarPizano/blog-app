@@ -23,20 +23,7 @@ exports.getPost = async (req, res) => {
     }
 }
 
-exports.editPost = async (req, res) => {
-    try {
-        const post = await Post.findByIdAndUpdate(req.params.id, req.body);
-        if (post !== null) {
-            res.json({status: true, info: 'OK', data: post});
-        } else {
-            res.json({status: false, info: 'NOT FOUND', data: []});
-        }
-    } catch (error) {
-        res.json({status: false, info: error.message, data: []});
-    }
-}
-
-exports.addPost = async (req, res) => {
+exports.createPost = async (req, res) => {
     const post = new Post(req.body);
     post._id = nanoid(6); 
     let date = new Date();
@@ -49,7 +36,20 @@ exports.addPost = async (req, res) => {
     }
 };
 
-exports.delPost = async (req, res) => {
+exports.updatePost = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndUpdate(req.params.id, req.body);
+        if (post !== null) {
+            res.json({status: true, info: 'OK', data: post});
+        } else {
+            res.json({status: false, info: 'NOT FOUND', data: []});
+        }
+    } catch (error) {
+        res.json({status: false, info: error.message, data: []});
+    }
+}
+
+exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndRemove(req.params.id);
         if (post !== null) {
