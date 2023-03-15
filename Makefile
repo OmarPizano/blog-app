@@ -49,7 +49,7 @@ stop:
 
 stop_clean:
 	docker compose down -v
-	docker rmi blog_web
+	docker rmi blog-web
 
 mongo_shell:
 	docker exec -it blog_db mongosh
