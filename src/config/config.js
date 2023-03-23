@@ -1,8 +1,7 @@
 require('dotenv').config({path: '../../'});
 
-const {
-    MONGO_URI,
-    NODE_PORT
-} = process.env;
-
-module.exports = { MONGO_URI, NODE_PORT };
+exports.MONGO_URI = process.env.MONGO_URI;
+exports.NODE_PORT = process.env.NODE_PORT;
+exports.CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
+exports.CLOUDINARY_KEY = process.env.CLOUDINARY_KEY;
+exports.CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;

@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const { nanoid } = require('nanoid');
+const cloudinary = require('../config/cloudinary');
+const fs = require('fs-extra');
 
 exports.getAllPosts = async (req, res) => {
     try {
@@ -29,6 +31,12 @@ exports.createPost = async (req, res) => {
     let date = new Date();
     new_post.date = `${date.getFullYear()}/${"0" + String(date.getMonth() + 1).slice(-2)}/${("0" + date.getDate()).slice(-2)}`;
     try {
+        if (req.files.image) {
+            const upload = await cloudinary.uploadFile(req.files.image.tempFilePath);
+            await fs.remove(req.files.image.tempFilePath);
+            new_post.image.url = upload.url;
+            new_post.image.public_id = upload.public_id;
+        }
         await new_post.save();
         res.sendStatus(201);
     } catch (error) {
@@ -55,6 +63,9 @@ exports.deletePost = async (req, res) => {
         if (!deleted_post) {
             res.sendStatus(404);
         } else {
+            if (deleted_post.image.public_id) {
+                const remove_cloud = await cloudinary.deleteFile(deleted_post.image.public_id);
+            }
             res.sendStatus(204);
         }
     } catch (error) {
