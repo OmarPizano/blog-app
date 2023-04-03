@@ -50,13 +50,15 @@ exports.updatePost = async (req, res) => {
         if (!updated_post) {
             res.sendStatus(404);
         } else {
-            if (req.files.image) {
-                const upload = await cloudinary.uploadFile(req.files.image.tempFilePath);
-                await fs.remove(req.files.image.tempFilePath);
-                updated_post.image.url = upload.url;
-                const remove = await cloudinary.deleteFile(updated_post.image.public_id);
-                updated_post.image.public_id = upload.public_id;
-                updated_post.save();
+            if (req.files) {
+                if (req.files.image) {
+                    const upload = await cloudinary.uploadFile(req.files.image.tempFilePath);
+                    await fs.remove(req.files.image.tempFilePath);
+                    updated_post.image.url = upload.url;
+                    const remove = await cloudinary.deleteFile(updated_post.image.public_id);
+                    updated_post.image.public_id = upload.public_id;
+                    updated_post.save();
+                }
             }
             res.sendStatus(204);
         }
