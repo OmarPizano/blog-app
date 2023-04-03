@@ -1,6 +1,6 @@
 NODE_CONTAINER_WORKDIR :=/home/node
 NODE_CONTAINER_NAME := node
-NODE_APP_LOCAL_DIR := src
+NODE_APP_LOCAL_DIR := backend
 USER_ID := $(shell id -u)
 GROUP_ID := $(shell id -g)
 
@@ -60,4 +60,4 @@ mongo_init:
 
 node_shell:
 	docker exec -it blog_web bash
-	rm src/.bash_history
+	rm $(NODE_APP_LOCAL_DIR)/.bash_history

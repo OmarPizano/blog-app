@@ -22,7 +22,7 @@ services:
         ports:
             - 127.0.0.1:80:$NODE_PORT
         volumes:
-            - ./src:/home/node
+            - ./backend:/home/node
         command: npm run dev
 volumes:
     mongo_data:
