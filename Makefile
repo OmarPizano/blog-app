@@ -1,32 +1,14 @@
 NODE_CONTAINER_WORKDIR :=/home/node
 NODE_CONTAINER_NAME := node
-NODE_APP_LOCAL_DIR := backend
+BACKEND_DIR := backend
 USER_ID := $(shell id -u)
 GROUP_ID := $(shell id -g)
 
-npm_init:
-	docker run \
-        --rm \
-        --volume "./$(NODE_APP_LOCAL_DIR):$(NODE_CONTAINER_WORKDIR)" \
-        --workdir $(NODE_CONTAINER_WORKDIR) \
-        --user $(USER_ID):$(GROUP_ID) \
-        $(NODE_CONTAINER_NAME) \
-        npm init -y
-
-npm_install:
-	docker run \
-        --rm \
-        --volume "./$(NODE_APP_LOCAL_DIR):$(NODE_CONTAINER_WORKDIR)" \
-        --workdir $(NODE_CONTAINER_WORKDIR) \
-        --user $(USER_ID):$(GROUP_ID) \
-        $(NODE_CONTAINER_NAME) \
-        npm install
-
-clean_modules:
-	rm -rf ./$(NODE_APP_LOCAL_DIR)/node_modules/*
-	rm -rf ./$(NODE_APP_LOCAL_DIR)/node_modules/.*
-	rm -f ./$(NODE_APP_LOCAL_DIR)/package-lock.json
-	rm -rf ./$(NODE_APP_LOCAL_DIR)/.npm
+cleanall:
+	rm -rf ./$(BACKEND_DIR)/node_modules/*
+	rm -rf ./$(BACKEND_DIR)/node_modules/.*
+	rm -f ./$(BACKEND_DIR)/package-lock.json
+	rm -rf ./$(BACKEND_DIR)/.npm
 
 start:
 	docker compose up -d
@@ -34,11 +16,11 @@ start:
 startbuild:
 	docker compose up -d --build
 
-logs_web:
-	docker logs blog_web
+logbackend:
+	docker logs blog-backend
 
-logs_db:
-	docker logs blog_db
+logdb:
+	docker logs blog-db
 
 restart:
 	docker compose down
@@ -47,17 +29,24 @@ restart:
 stop:
 	docker compose down
 
-stop_clean:
+stopclean:
 	docker compose down -v
-	docker rmi blog-web
+	docker rmi blog-backend
 
-mongo_shell:
-	docker exec -it blog_db mongosh
+shelldb:
+	docker exec -it blog-db mongosh
 
-mongo_init:
-	docker cp init_mongo.js blog_db:init_mongo.js
-	docker exec -it blog_db mongosh admin init_mongo.js
+shellbackend:
+	docker exec -it blog-backend bash
+	find . -type f -name ".bash_history" -exec rm {} \;
 
-node_shell:
-	docker exec -it blog_web bash
-	rm $(NODE_APP_LOCAL_DIR)/.bash_history
+shellbackend_fresh:
+	docker run \
+	-it \
+	--rm \
+	--volume "./$(BACKEND_DIR):$(NODE_CONTAINER_WORKDIR)" \
+	--workdir $(NODE_CONTAINER_WORKDIR) \
+	--user $(USER_ID):$(GROUP_ID) \
+	$(NODE_CONTAINER_NAME) \
+	bash
+	find . -type f -name ".bash_history" -exec rm {} \;

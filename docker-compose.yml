@@ -1,26 +1,23 @@
 version: '3.8'
 services:
-    database:
-        container_name: blog_db
+    db:
+        container_name: blog-db
         image: mongo
         ports:
             - 127.0.0.1:27017:27017
         volumes:
             - mongo_data:/data/db
             - mongo_data_config:/data/configdb
-    web:
-        container_name: blog_web
+    backend:
+        container_name: blog-backend
         build:
             context: .
             dockerfile: Dockerfile
         env_file: .env
-        environment:
-            - MONGO_URI=$MONGO_URI
-            - NODE_PORT=$NODE_PORT
         depends_on:
-            - database
+            - db
         ports:
-            - 127.0.0.1:80:$NODE_PORT
+            - 127.0.0.1:8000:$BACKEND_PORT
         volumes:
             - ./backend:/home/node
         command: npm run dev

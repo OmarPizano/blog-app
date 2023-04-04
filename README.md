@@ -5,7 +5,7 @@ Prototipo de un blog con Node.js y MongoDB.
 Estado:
 
 - [X] API Backend
-- [ ] Frontend
+- [ ] Frontend *en progreso*
 
 ## Modo de uso
 
@@ -17,7 +17,7 @@ git clone https://github.com/OmarPizano/blog-app
 Crear un archivo `.env`:
 ```
 MONGO_URI=mongodb://XXXX/XXXX
-NODE_PORT=XXXX
+BACKEND_PORT=XXXX
 CLOUDINARY_NAME=XXXX
 CLOUDINARY_KEY=XXXX
 CLOUDINARY_SECRET=XXXX
