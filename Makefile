@@ -1,6 +1,7 @@
 NODE_CONTAINER_WORKDIR :=/home/node
 NODE_CONTAINER_NAME := node
 BACKEND_DIR := backend
+FRONTEND_DIR := frontend
 USER_ID := $(shell id -u)
 GROUP_ID := $(shell id -g)
 
@@ -45,6 +46,21 @@ shellbackend_fresh:
 	-it \
 	--rm \
 	--volume "./$(BACKEND_DIR):$(NODE_CONTAINER_WORKDIR)" \
+	--workdir $(NODE_CONTAINER_WORKDIR) \
+	--user $(USER_ID):$(GROUP_ID) \
+	$(NODE_CONTAINER_NAME) \
+	bash
+	find . -type f -name ".bash_history" -exec rm {} \;
+
+shellfrontend:
+	docker exec -it blog-frontend bash
+	find . -type f -name ".bash_history" -exec rm {} \;
+
+shellfrontend_fresh:
+	docker run \
+	-it \
+	--rm \
+	--volume "./$(FRONTEND_DIR):$(NODE_CONTAINER_WORKDIR)" \
 	--workdir $(NODE_CONTAINER_WORKDIR) \
 	--user $(USER_ID):$(GROUP_ID) \
 	$(NODE_CONTAINER_NAME) \
