@@ -19,7 +19,7 @@ services:
         ports:
             - 127.0.0.1:$BACKEND_PORT:$BACKEND_PORT
         volumes:
-            - ./backend:/home/node
+            - ./src/backend:/home/node
         command: npm run dev
     frontend:
         container_name: blog-frontend
@@ -32,7 +32,7 @@ services:
         ports:
             - 127.0.0.1:$FRONTEND_PORT:3000
         volumes:
-            - ./frontend:/home/node
+            - ./src/frontend:/home/node
         command: npm start
 volumes:
     mongo_data:

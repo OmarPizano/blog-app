@@ -1,11 +1,12 @@
 # blog
 
-Prototipo de un blog con Node.js y MongoDB.
+Prototipo de un blog con el stack MERN.
 
 Estado:
 
 - [X] API Backend
 - [ ] Frontend *en progreso*
+- [ ] Despliegue
 
 ## Modo de uso
 
@@ -18,26 +19,33 @@ Crear un archivo `.env`:
 ```
 MONGO_URI=mongodb://XXXX/XXXX
 BACKEND_PORT=XXXX
+FRONTEND_PORT=XXXX
 CLOUDINARY_NAME=XXXX
 CLOUDINARY_KEY=XXXX
 CLOUDINARY_SECRET=XXXX
 ```
 
+Instalar dependencias (genera `node_modules` de backend y frontend)
+```bash
+# sólo la primera vez
+make init
+```
+
 Iniciar el servicio
 ```bash
-docker compose up -d
-# o usando Makefile
 make start
 ```
 
 Parar el servicio
 ```bash
-docker compose down
-# o usando Makefile
 make stop
 ```
 
-Test HTTP requests usando `curl`.
+**NOTA**: Para ver más operaciones revisar el [Makefile](./Makefile).
+
+## Backend API
+
+Probar el backend (API) usando `curl`.
 ```bash
 # obtener todos los posts
 curl 127.0.0.1 -X GET
@@ -60,6 +68,9 @@ curl 127.0.0.1 -X PUT -F image=@/path/to/new_image.png
 
 ## Changelog
 
+- **07/04/2023**: *Agregar plantilla para el frontend*
+	- Frontend y backend separados
+	- Agregar script de inicialización
 - **24/03/2023**: *Soporte para Cloudinary: editar imágen*
 - **23/03/2023**: *Soporte para Cloudinary: subir y eliminar imágenes*
 - **15/03/2023**: *Agregar operaciones CRUD*
