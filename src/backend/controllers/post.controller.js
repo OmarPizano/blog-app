@@ -38,7 +38,7 @@ exports.createPost = async (req, res) => {
             new_post.image.public_id = upload.public_id;
         }
         await new_post.save();
-        res.sendStatus(201);
+        res.status(201).json(new_post);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -58,7 +58,7 @@ exports.updatePost = async (req, res) => {
                 updated_post.image.public_id = upload.public_id;
                 updated_post.save();
             }
-            res.sendStatus(204);
+            res.status(204).json(updated_post);
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
