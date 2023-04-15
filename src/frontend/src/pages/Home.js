@@ -14,8 +14,8 @@ export function Home() {
     )
 
     return (
-        <Page title="Posts" content={
+        <Page title="Posts">
             <PostList posts={posts} />
-        } />
+        </Page>
     );
 };

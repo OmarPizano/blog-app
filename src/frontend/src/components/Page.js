@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export function Page({title, content}) {
+export function Page({title, children}) {
     return (
         <div className="flex flex-col gap-3 items-center">
             <Title text={title} />
-            {content}
+            {children}
         </div>
     )
 }
