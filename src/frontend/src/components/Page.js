@@ -34,16 +34,16 @@ export function NotifyInfo({text}) {
         </div>
     );
 }
-// TODO: Crear un ButtonGroup Genérico
-export function NotifyAsk({text}) {
+
+export function NotifyAsk({text, tid, callback}) {
     return (
         <div className="grid grid-rows-2 gap-1 text-white">
             <div className="flex justify-center items-center">
                 <p>{text}</p>
             </div>
             <ButtonGroup>
-                <ButtonRed text="OK"/>
-                <Button text="Cancel"/>
+                <ButtonRed text="OK" callback={callback}/>
+                <Button text="Cancel" callback={() => toast.dismiss(tid) }/>
             </ButtonGroup>
         </div>
     );
@@ -51,13 +51,13 @@ export function NotifyAsk({text}) {
 
 export function ButtonGroup({children}) {
   return (
-    <div className="flex flex-row gap-2 justify-end">
+    <div className="flex flex-row gap-2 justify-end items-center">
       {children}
     </div>
   )
 }
 
-export function Button({text, href}) {
+export function Button({text, href, callback}) {
     return (
         <Link className="
         p-2
@@ -66,7 +66,7 @@ export function Button({text, href}) {
         hover:bg-indigo-600
         hover:text-black
         "
-        to={href}>{text}</Link>
+        to={href} onClick={callback}>{text}</Link>
     );
 }
 

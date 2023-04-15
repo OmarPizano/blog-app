@@ -1,5 +1,6 @@
 import { Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo } from "../components/Page";
 import { toast } from "react-hot-toast";
+import { GetContext } from "../context/PostContext";
 
 export function PostList({posts}) {
     return (
@@ -26,9 +27,19 @@ function PostGrid({children}) {
 
 function PostCard({post}) {
 
-    const handleDelete = () => {
-        toast(() => (
-            <NotifyAsk text="Do you really want to delete this item?" />
+    const {deletePost} = GetContext();
+
+    const handleDelete = (id, title) => {
+        if (title.length > 20) title = title.substring(0,2);
+        toast((t) => (
+            <NotifyAsk
+                tid={t.id}
+                text={"Do you really want to delete '" + title + "' post?"}
+                callback={() => {
+                    deletePost(id);
+                    toast.dismiss(t.id);
+                }
+            }/>
         ), {
             style: {
                 background: "#333333"
@@ -55,7 +66,7 @@ function PostCard({post}) {
         	  <p className="text-neutral-400 text-sm italic">{post.content}</p>
           </div>
           <ButtonGroup>
-            <ButtonRed text='Delete' callback={handleDelete}/>
+            <ButtonRed text='Delete' callback={() => handleDelete(post._id, post.title)}/>
           </ButtonGroup>
       </div>
     </div>
