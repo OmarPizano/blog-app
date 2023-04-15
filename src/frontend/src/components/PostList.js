@@ -1,4 +1,4 @@
-import { Title, Button } from "../components/Page";
+import { Title, Button, ButtonRed } from "../components/Page";
 
 export function PostList({posts}) {
     return (
@@ -43,12 +43,17 @@ function PostCard({post}) {
       <div className="col-span-1">
         <img src={post.image?.url} alt="postimg" />
       </div>
-      <div className="col-span-4 m-2 text-white">
+      <div className="col-span-4 grid grid-rows-3 items-center m-2 text-white">
           <div className="flex flex-row justify-between">
           	<h2 className="text-xl font-bold tracking-widest">{post.title}</h2>
           	<p className="font-extralight">{post.date}</p>
           </div>
-        	<p className="text-neutral-400 text-sm italic">{post.content}</p>
+          <div>
+        	  <p className="text-neutral-400 text-sm italic">{post.content}</p>
+          </div>
+          <div className=" flex flex-row justify-end">
+            <ButtonRed text='Delete' href='#'/>
+          </div>
       </div>
     </div>
   )

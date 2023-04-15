@@ -21,7 +21,20 @@ export function Button({text, href}) {
         p-2
         bg-black 
         text-white
-        hover:bg-neutral-500
+        hover:bg-indigo-600
+        hover:text-black
+        "
+        to={href}>{text}</Link>
+    );
+}
+
+export function ButtonRed({text, href}) {
+    return (
+        <Link className="
+        p-2
+        bg-black 
+        text-white
+        hover:bg-rose-600
         hover:text-black
         "
         to={href}>{text}</Link>
