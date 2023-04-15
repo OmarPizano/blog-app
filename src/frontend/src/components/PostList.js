@@ -1,12 +1,13 @@
-import { Title, Button, ButtonRed } from "../components/Page";
+import { Title, Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo } from "../components/Page";
+import { toast } from "react-hot-toast";
 
 export function PostList({posts}) {
     return (
-        <div>
+        <div className="flex flex-col gap-3">
             <Title text='Posts' />
-            <PostListActions>
+            <ButtonGroup>
               <Button text='New Post' href='/new' />
-            </PostListActions>
+            </ButtonGroup>
             <PostGrid>
                 {posts.map(post => (
                     <PostCard post={post} key={post._id}/>
@@ -14,14 +15,6 @@ export function PostList({posts}) {
             </PostGrid>
         </div>
     );
-}
-
-function PostListActions({children}) {
-  return (
-    <div className="flex flex-row gap-2 justify-end my-2">
-      {children}
-    </div>
-  )
 }
 
 function PostGrid({children}) {
@@ -33,6 +26,17 @@ function PostGrid({children}) {
 }
 
 function PostCard({post}) {
+
+    const handleDelete = () => {
+        toast(() => (
+            <NotifyAsk text="Do you really want to delete this item?" />
+        ), {
+            style: {
+                background: "#333333"
+            },
+        });
+    };
+
   return (
     <div className="
     grid grid-cols-5
@@ -51,9 +55,9 @@ function PostCard({post}) {
           <div>
         	  <p className="text-neutral-400 text-sm italic">{post.content}</p>
           </div>
-          <div className=" flex flex-row justify-end">
-            <ButtonRed text='Delete' href='#'/>
-          </div>
+          <ButtonGroup>
+            <ButtonRed text='Delete' callback={handleDelete}/>
+          </ButtonGroup>
       </div>
     </div>
   )

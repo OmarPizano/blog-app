@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export function Title({text}) {
     return (
@@ -15,6 +16,36 @@ export function Title({text}) {
     )
 }
 
+export function NotifyInfo({text}) {
+    return (
+        <div className="text-white">
+            <p>{text}</p>
+        </div>
+    );
+}
+// TODO: Crear un ButtonGroup Genérico
+export function NotifyAsk({text}) {
+    return (
+        <div className="grid grid-rows-2 gap-1 text-white">
+            <div className="flex justify-center items-center">
+                <p>{text}</p>
+            </div>
+            <ButtonGroup>
+                <ButtonRed text="OK"/>
+                <Button text="Cancel"/>
+            </ButtonGroup>
+        </div>
+    );
+}
+
+export function ButtonGroup({children}) {
+  return (
+    <div className="flex flex-row gap-2 justify-end">
+      {children}
+    </div>
+  )
+}
+
 export function Button({text, href}) {
     return (
         <Link className="
@@ -28,7 +59,7 @@ export function Button({text, href}) {
     );
 }
 
-export function ButtonRed({text, href}) {
+export function ButtonRed({text, href, callback}) {
     return (
         <Link className="
         p-2
@@ -37,6 +68,6 @@ export function ButtonRed({text, href}) {
         hover:bg-rose-600
         hover:text-black
         "
-        to={href}>{text}</Link>
+        to={href} onClick={callback}>{text}</Link>
     );
 }
