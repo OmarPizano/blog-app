@@ -1,13 +1,24 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export function Title({text}) {
+export function Page({title, content}) {
+    return (
+        <div className="flex flex-col gap-3 items-center">
+            <Title text={title} />
+            {content}
+        </div>
+    )
+}
+
+function Title({text}) {
     return (
         <div className="
         flex
         justify-center
         items-center
-        py-2
+        w-2/3
+        bg-neutral-800
+        p-3
         ">
             <h1 className="text-white text-5xl font-medium">
                 {text}

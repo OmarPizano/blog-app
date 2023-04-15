@@ -1,6 +1,7 @@
 import { GetContext } from "../context/PostContext";
 import { AiFillFileExclamation } from "react-icons/ai";
 import { PostList } from "../components/PostList";
+import { Page } from "../components/Page";
 
 export function Home() {
     const {posts} = GetContext();
@@ -13,6 +14,8 @@ export function Home() {
     )
 
     return (
-        <PostList posts={posts} /> 
+        <Page title="Posts" content={
+            <PostList posts={posts} />
+        } />
     );
 };

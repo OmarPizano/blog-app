@@ -1,10 +1,9 @@
-import { Title, Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo } from "../components/Page";
+import { Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo } from "../components/Page";
 import { toast } from "react-hot-toast";
 
 export function PostList({posts}) {
     return (
         <div className="flex flex-col gap-3">
-            <Title text='Posts' />
             <ButtonGroup>
               <Button text='New Post' href='/new' />
             </ButtonGroup>
