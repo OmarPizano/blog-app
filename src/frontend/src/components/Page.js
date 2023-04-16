@@ -19,6 +19,8 @@ function Title({text}) {
         w-2/3
         bg-neutral-800
         p-3
+        shadow-md
+        shadow-black
         ">
             <h1 className="text-white text-5xl font-medium">
                 {text}
