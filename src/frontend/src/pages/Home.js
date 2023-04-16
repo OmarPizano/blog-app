@@ -4,13 +4,21 @@ import { PostList } from "../components/PostList";
 import { Page } from "../components/Page";
 
 export function Home() {
-    const {posts} = usePostContext();
+    const {posts, isLoading} = usePostContext();
 
-    if (posts.length === 0) return (
-        <div className="flex flex-col justify-center items-center">
-            <AiFillFileExclamation className="w-24 h-24 text-white" />
-            <h1 className="text-white">There is nothing here yet!</h1>
+    if (isLoading) return (
+        // TODO: Agregar spinner
+        <div>
+            <p className="text-white">LOADING...</p>
         </div>
+    )
+
+    if (isLoading === false && posts.length === 0) return (
+        // TODO: estilizar y refactorizar en un componente genérico
+        <Page title="Posts">
+            <AiFillFileExclamation className="w-24 h-24 text-white" />
+            <p className="text-white">There is nothing here yet!</p>
+        </Page>
     )
 
     return (

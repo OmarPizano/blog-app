@@ -3,38 +3,44 @@ import { apiGetPosts, apiCreatePost, apiDeletePost } from "../api/posts";
 
 const post_context = createContext();
 
-export const usePostContext = () => {
+// hook para utililizar el contexto en otros componentes
+export function usePostContext() {
     const context = useContext(post_context);
     return context;
 }
 
-export const PostProvider = ({children}) => {
-    const [posts, setPosts] = useState([]);
+// componente proveedor de contexto para posts
+export function PostProvider({ children }) {
 
-    const getPosts = async () => {
+    const [posts, setPosts] = useState([]); 
+    const [isLoading, setLoading] = useState(true);
+
+    // funciones para sincronizar el backend con el estado
+    async function loadPosts() {
         const res = await apiGetPosts();
+        setLoading(false);
         setPosts(res.data);
     }
-
-    const createPost = async (post) => {
+    async function createPost(post) {
         const res = await apiCreatePost(post);
         setPosts([...posts, res.data]);
     }
-
-    const deletePost = async (id) => {
+    async function deletePost(id) {
         const res = await apiDeletePost(id);
         if (res.status === 204) {
             setPosts(posts.filter(post => post._id !== id));
         }
     }
-
-    useEffect(() => {
-      getPosts(); 
-    }, [])
     
+    // cargar los posts en el contexto
+    useEffect(() => {
+        loadPosts();
+    }, []);
+    
+    // retornar el componente; en value indicamos el acceso requerido
     return (
-        <post_context.Provider value={ {posts, createPost, deletePost} }>
+        <post_context.Provider value={{ isLoading, posts, createPost, deletePost }}>
             {children}
         </post_context.Provider>
     );
-};
+}
