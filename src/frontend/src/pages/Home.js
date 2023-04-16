@@ -1,10 +1,10 @@
-import { GetContext } from "../context/PostContext";
+import { usePostContext } from "../context/PostContext";
 import { AiFillFileExclamation } from "react-icons/ai";
 import { PostList } from "../components/PostList";
 import { Page } from "../components/Page";
 
 export function Home() {
-    const {posts} = GetContext();
+    const {posts} = usePostContext();
 
     if (posts.length === 0) return (
         <div className="flex flex-col justify-center items-center">

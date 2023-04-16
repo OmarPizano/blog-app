@@ -3,7 +3,7 @@ import { apiGetPosts, apiCreatePost, apiDeletePost } from "../api/posts";
 
 const post_context = createContext();
 
-export const GetContext = () => {
+export const usePostContext = () => {
     const context = useContext(post_context);
     return context;
 }

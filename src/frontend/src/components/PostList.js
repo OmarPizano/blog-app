@@ -1,6 +1,6 @@
 import { Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo } from "../components/Page";
 import { toast } from "react-hot-toast";
-import { GetContext } from "../context/PostContext";
+import { usePostContext } from "../context/PostContext";
 
 export function PostList({posts}) {
     return (
@@ -27,7 +27,7 @@ function PostGrid({children}) {
 
 function PostCard({post}) {
 
-    const {deletePost} = GetContext();
+    const {deletePost} = usePostContext();
 
     const handleDelete = (id, title) => {
         if (title.length > 20) title = title.substring(0,2);

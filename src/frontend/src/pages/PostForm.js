@@ -1,11 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { GetContext } from "../context/PostContext";
+import { usePostContext } from "../context/PostContext";
 import { useNavigate, Link } from "react-router-dom";
 import * as yp from "yup";
 
 export function PostForm() {
 
-    const {createPost} = GetContext();
+    const {createPost} = usePostContext();
     const navigate = useNavigate();
 
     return (
