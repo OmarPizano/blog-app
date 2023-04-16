@@ -5,7 +5,9 @@ export function Page({title, children}) {
     return (
         <div className="flex flex-col gap-3 items-center">
             <Title text={title} />
-            {children}
+            <Content>
+                {children}
+            </Content>
         </div>
     )
 }
@@ -27,6 +29,22 @@ function Title({text}) {
             </h1>
         </div>
     )
+}
+
+function Content({children}) {
+    return (
+        <div className="w-2/3">
+            {children}
+        </div>
+    )
+}
+
+export function Card({children}) {
+    return (
+        <div className="bg-neutral-800 shadow-md shadow-black hover:bg-neutral-950">
+            {children}
+        </div>
+    );
 }
 
 export function NotifyInfo({text}) {
@@ -83,4 +101,21 @@ export function ButtonRed({text, href, callback}) {
         "
         to={href} onClick={callback}>{text}</Link>
     );
+}
+
+export function ButtonConfirmHandler(callback, textConfirm) {
+    toast((t) => (
+        <NotifyAsk
+            tid={t.id}
+            text={textConfirm}
+            callback={() => {
+                callback();
+                toast.dismiss(t.id);
+            }
+        }/>
+    ), {
+        style: {
+            background: "#333333"
+        },
+    });
 }
