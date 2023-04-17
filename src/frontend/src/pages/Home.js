@@ -1,17 +1,12 @@
 import { usePostContext } from "../context/PostContext";
 import { AiFillFileExclamation } from "react-icons/ai";
 import { PostList } from "../components/PostList";
-import { Page } from "../components/Page";
+import { Page, Loading } from "../components/Page";
 
 export function Home() {
     const {posts, isLoading} = usePostContext();
 
-    if (isLoading) return (
-        // TODO: Agregar spinner
-        <div>
-            <p className="text-white">LOADING...</p>
-        </div>
-    )
+    if (isLoading) return <Loading />
 
     if (isLoading === false && posts.length === 0) return (
         // TODO: estilizar y refactorizar en un componente genérico

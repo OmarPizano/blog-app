@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { ThreeCircles } from "react-loader-spinner";
 
 export function Page({title, children}) {
     return (
@@ -8,6 +9,25 @@ export function Page({title, children}) {
             <Content>
                 {children}
             </Content>
+        </div>
+    )
+}
+
+export function Loading() {
+    return (
+        <div className="flex flex-col gap-10 p-20 items-center justify-center">
+            <ThreeCircles
+                height="100"
+                width="100"
+                color="#696969"
+                visible={true}
+                ariaLabel="three-circles-rotating"
+                outerCircleColor="#ff0033"
+                innerCircleColor="#00aaff"
+                middleCircleColor="#5e00a3"
+            />
+            <p className="text-white text-lg">Loading...</p>
+
         </div>
     )
 }
