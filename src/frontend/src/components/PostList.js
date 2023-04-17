@@ -31,22 +31,42 @@ function Post({post}) {
     };
 
     return (
-        <div className="grid grid-cols-5">
-            <div className="col-span-1 bg-red-950">
-                <img className="object-cover h-full w-full" src={post.image?.url} alt="postimg" />
-            </div>
-            <div className="col-span-4 grid grid-rows-3 items-center m-2 text-white">
-                <div className="flex flex-row justify-between">
-          	        <h2 className="text-xl font-bold tracking-widest">{post.title}</h2>
-          	        <p className="font-extralight">{post.date}</p>
-                </div>
-                <div>
-        	        <p className="text-neutral-400 text-sm italic">{post.content}</p>
-                </div>
+        <div className="flex flex-row h-44">
+            <PostImg img={post.image?.url} />
+            <div className="basis-3/4 flex flex-col gap-2 m-2 text-white">
+                <PostHeader title={post.title} date={post.date} />
+                <PostContent content={post.content} />
                 <ButtonGroup>
                     <ButtonRed text='Delete' callback={() => handleDelete(post._id, post.title)}/>
                 </ButtonGroup>
             </div>
+        </div>
+    );
+}
+
+function PostImg({img}) {
+    return (
+        <div className="h-44 w-44">
+            <img className="object-cover h-full w-full" src={img} alt="postimg" />
+        </div>
+    );
+}
+
+function PostHeader({title, date}) {
+    return (
+        <div className="flex flex-row justify-between gap-3 h-14 overflow-hidden">
+            <h2 className="text-xl font-bold tracking-widest text-ellipsis break-words">{title}</h2>
+            <p className="font-extralight">{date}</p>
+        </div>
+    )
+}
+
+function PostContent({content}) {
+    return (
+        <div className="h-10 overflow-hidden">
+            <p className="text-neutral-400 text-sm italic text-ellipsis break-words">
+                {content}
+            </p>
         </div>
     );
 }

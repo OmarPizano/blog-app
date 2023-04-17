@@ -18,7 +18,7 @@ function Title({text}) {
         flex
         justify-center
         items-center
-        w-2/3
+        w-5/6
         bg-neutral-800
         p-3
         shadow-md
@@ -33,7 +33,7 @@ function Title({text}) {
 
 function Content({children}) {
     return (
-        <div className="w-2/3">
+        <div className="w-5/6">
             {children}
         </div>
     )
