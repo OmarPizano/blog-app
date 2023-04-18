@@ -1,5 +1,4 @@
-import { Button, ButtonRed, ButtonGroup, NotifyAsk, NotifyInfo, Card, ButtonConfirmHandler } from "../components/Page";
-import { toast } from "react-hot-toast";
+import { Button, ButtonRed, ButtonGroup, Card, ButtonConfirmHandler } from "../components/Page";
 import { usePostContext } from "../context/PostContext";
 
 export function PostList({posts}) {
