@@ -67,6 +67,14 @@ export function Card({children}) {
     );
 }
 
+export function Container({children}) {
+    return (
+        <div className="p-3 flex flex-col items-center bg-neutral-800 shadow-md shadow-black">
+            {children}
+        </div>
+    );
+}
+
 export function NotifyInfo({text}) {
     return (
         <div className="text-white">
@@ -107,6 +115,19 @@ export function Button({text, href, callback}) {
         hover:text-black
         "
         to={href} onClick={callback}>{text}</Link>
+    );
+}
+
+export function ButtonSubmit({text}) {
+    return (
+        <button className="
+        p-2
+        bg-black 
+        text-white
+        hover:bg-indigo-600
+        hover:text-black
+        "
+        type="submit">{text}</button>
     );
 }
 

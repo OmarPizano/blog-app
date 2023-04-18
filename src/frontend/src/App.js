@@ -1,4 +1,4 @@
-import { Home, PostForm, NotFound } from './pages'
+import { Home, NotFound, NewUser } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { PostProvider } from './context/PostContext'
 import { Layout } from "./layout";
@@ -10,7 +10,7 @@ function App() {
       <PostProvider>
         <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/new' element={<PostForm/>} />
+          <Route path='/new' element={<NewUser/>} />
           <Route path='*' element={<NotFound/>} />
         </Routes>
         <Toaster />

@@ -1,3 +1,3 @@
 export {Home} from './Home';
-export {PostForm} from './PostForm';
+export {NewUser} from './NewUser';
 export {NotFound} from './NotFound';
