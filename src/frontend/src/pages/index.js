@@ -1,3 +1,3 @@
-export {Home} from './Home';
-export {NewUser} from './NewUser';
-export {NotFound} from './NotFound';
+export {HomePage} from './HomePage';
+export {PostFormPage} from './PostFormPage';
+export {NotFoundPage} from './NotFoundPage';

@@ -3,7 +3,7 @@ import { AiFillFileExclamation } from "react-icons/ai";
 import { PostList } from "../components/PostList";
 import { Page, Loading } from "../components/Page";
 
-export function Home() {
+export function HomePage() {
     const {posts, isLoading} = usePostContext();
 
     if (isLoading) return <Loading />
