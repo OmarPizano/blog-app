@@ -1,9 +1,9 @@
 import { PostForm } from "../components/PostForm";
 import { Page } from "../components/Page";
 
-export function PostFormPage() {
+export function PostFormPage({title}) {
     return (
-        <Page title="New Post">
+        <Page title={title}>
             <PostForm />
         </Page>
     );
