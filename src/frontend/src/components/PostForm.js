@@ -48,9 +48,9 @@ export function PostForm() {
                 <Form>
                     <Container>
                         <div className="flex flex-col w-1/2">
-                            <PostFormField name="title" placeholder="Title" />
-                            <PostFormField name="content" placeholder="Content of the post" />
-                            <PostFormInput set={(evt) => setFieldValue("image", evt.target.files[0])}/>
+                            <PostFormField name="title" label="Title" placeholder="Title" />
+                            <PostFormText name="content" label="Content" placeholder="Content of the post" />
+                            <PostFormFile set={(evt) => setFieldValue("image", evt.target.files[0])}/>
                             <ButtonGroup>
                                 <ButtonSubmit text='Save' disabled={isSubmitting}/>
                                 <ButtonRed text='Cancel' href='/' />
@@ -63,16 +63,31 @@ export function PostForm() {
     );
 }
 
-export function PostFormField({name, placeholder}) {
+export function PostFormField({name, placeholder, label}) {
     return (
         <div>
+            <label htmlFor={name} className="text-white text-sm block font-bold">{label}</label>
             <Field className="my-2 p-2 bg-neutral-700 text-white focus:outline-none w-full" name={name} placeholder={placeholder}/>
-            <ErrorMessage component={"p"} className="text-red-300 text-sm" name={name} />
+            <div className="flex justify-end">
+                <ErrorMessage component={"p"} className="text-red-300 text-sm italic" name={name} />
+            </div>
         </div>
     );
 }
 
-export function PostFormInput({set}) {
+export function PostFormText({name, placeholder, label}) {
+    return (
+        <div>
+            <label htmlFor={name} className="text-white text-sm block font-bold">{label}</label>
+            <Field component={"textarea"} rows={4} className="my-2 p-2 bg-neutral-700 text-white focus:outline-none w-full" name={name} placeholder={placeholder}/>
+            <div className="flex justify-end">
+                <ErrorMessage component={"p"} className="text-red-300 text-sm italic" name={name} />
+            </div>
+        </div>
+    );
+}
+
+export function PostFormFile({set}) {
     return (
         <div>
             <input type="file" name="image" className="my-2 p-2 bg-neutral-700 text-white focus:outline-none w-full"
