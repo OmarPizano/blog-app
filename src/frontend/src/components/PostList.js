@@ -1,5 +1,6 @@
 import { Button, ButtonRed, ButtonGroup, Card, ButtonConfirmHandler } from "../components/Page";
 import { usePostContext } from "../context/PostContext";
+import { useNavigate } from "react-router-dom";
 
 export function PostList({posts}) {
     return (
@@ -20,8 +21,11 @@ export function PostList({posts}) {
 
 function Post({post}) {
     const {deletePost} = usePostContext();
+    const navigate = useNavigate();
 
-    function handleDelete(id, title) {
+    function handleDelete(evt, id, title) {
+        // evitar que el click de delete se propague como un click al div
+        evt.stopPropagation();
         if (title.length > 20) title = title.substring(0,15);
         ButtonConfirmHandler(
             () => deletePost(id),
@@ -30,13 +34,13 @@ function Post({post}) {
     };
 
     return (
-        <div className="flex flex-row h-44">
+        <div className="flex flex-row h-44" onClick={() => navigate(`/edit/${post._id}`)}>
             <PostImg img={post.image?.url} />
             <div className="basis-3/4 flex flex-col gap-2 m-2 text-white">
                 <PostHeader title={post.title} date={post.date} />
                 <PostContent content={post.content} />
                 <ButtonGroup>
-                    <ButtonRed text='Delete' callback={() => handleDelete(post._id, post.title)}/>
+                    <ButtonRed text='Delete' callback={(evt) => handleDelete(evt, post._id, post.title)}/>
                 </ButtonGroup>
             </div>
         </div>

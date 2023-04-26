@@ -1,23 +1,47 @@
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yp from "yup";
 import { Button, ButtonRed, ButtonSubmit, Page, Container, ButtonGroup } from "../components/Page";
 import { usePostContext } from "../context/PostContext";
+import { useEffect, useState } from "react";
 
 export function PostForm() {
 
-    const {createPost} = usePostContext();
+    const {createPost, getPost, updatePost} = usePostContext();
     const navigate = useNavigate();
+    const params = useParams();
+    // modelo del formulario
+    const [postModel, setPostModel] = useState({
+        "title": "",
+        "content": ""
+    })
+
+    useEffect(() => {
+      // TODO: revisar que el params tenga un id, y si es así
+      // traer los datos desde el backend
+      (async () => {
+        if (params.id) {
+            const post = await getPost(params.id);
+            setPostModel(post);
+        }
+      })();
+    }, [])
+    
     
     return (
         <Formik
-            initialValues={{title: "", content: "", image: ""}}
+            initialValues={postModel}
+            enableReinitialize
             validationSchema={yp.object({
                 title: yp.string().required('Title required'),
                 content: yp.string().required('Content required')
             })}
             onSubmit={async (values, actions) => {
-                await createPost(values);
+                if (params.id) {
+                    await updatePost(params.id, values); 
+                } else {
+                    await createPost(values);
+                }
                 navigate('/');
             }}>
             {({handleSubmit}) => (

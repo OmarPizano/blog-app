@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
-import { apiGetPosts, apiCreatePost, apiDeletePost } from "../api/posts";
+import { apiGetPosts, apiCreatePost, apiDeletePost, apiGetPost, apiUpdatePost } from "../api/posts";
 
 const post_context = createContext();
 
@@ -15,11 +15,22 @@ export function PostProvider({ children }) {
     const [posts, setPosts] = useState([]); 
     const [isLoading, setLoading] = useState(true);
 
+    // TODO: usar los estados devueltos por el backend para validar las peticiones
     // funciones para sincronizar el backend con el estado
     async function loadPosts() {
         const res = await apiGetPosts();
         setLoading(false);
         setPosts(res.data);
+    }
+    async function getPost(id) {
+        const res = await apiGetPost(id);
+        return res.data;
+    }
+    async function updatePost(id, data) {
+        const res = await apiUpdatePost(id, data);
+        if (res.status === 200) {
+            setPosts(posts.map((post) => (post._id === id ? res.data : post)))
+        }
     }
     async function createPost(post) {
         const res = await apiCreatePost(post);
@@ -39,7 +50,7 @@ export function PostProvider({ children }) {
     
     // retornar el componente; en value indicamos el acceso requerido
     return (
-        <post_context.Provider value={{ isLoading, posts, createPost, deletePost }}>
+        <post_context.Provider value={{ isLoading, posts, createPost, deletePost, getPost, updatePost }}>
             {children}
         </post_context.Provider>
     );

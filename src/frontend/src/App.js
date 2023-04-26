@@ -10,7 +10,8 @@ function App() {
       <PostProvider>
         <Routes>
           <Route path='/' element={<HomePage/>} />
-          <Route path='/new' element={<PostFormPage/>} />
+          <Route path='/new' element={<PostFormPage title="New Post"/>}/>
+          <Route path='/edit/:id' element={<PostFormPage title="Edit Post"/>}/>
           <Route path='*' element={<NotFoundPage/>} />
         </Routes>
         <Toaster />
