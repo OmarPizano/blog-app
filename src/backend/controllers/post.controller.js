@@ -58,7 +58,7 @@ exports.updatePost = async (req, res) => {
                 updated_post.image.public_id = upload.public_id;
                 updated_post.save();
             }
-            res.status(204).json(updated_post);
+            res.status(200).json(updated_post);
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
