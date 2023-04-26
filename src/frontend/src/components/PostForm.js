@@ -12,13 +12,12 @@ export function PostForm() {
     const params = useParams();
     // modelo del formulario
     const [postModel, setPostModel] = useState({
-        "title": "",
-        "content": ""
+        title: "",
+        content: "",
+        image: null
     })
 
     useEffect(() => {
-      // TODO: revisar que el params tenga un id, y si es así
-      // traer los datos desde el backend
       (async () => {
         if (params.id) {
             const post = await getPost(params.id);
@@ -42,16 +41,18 @@ export function PostForm() {
                 } else {
                     await createPost(values);
                 }
+                actions.setSubmitting(false);
                 navigate('/');
             }}>
-            {({handleSubmit}) => (
+            {({handleSubmit, setFieldValue, isSubmitting}) => (
                 <Form>
                     <Container>
                         <div className="flex flex-col w-1/2">
                             <PostFormField name="title" placeholder="Title" />
                             <PostFormField name="content" placeholder="Content of the post" />
+                            <PostFormInput set={(evt) => setFieldValue("image", evt.target.files[0])}/>
                             <ButtonGroup>
-                                <ButtonSubmit text='Save' />
+                                <ButtonSubmit text='Save' disabled={isSubmitting}/>
                                 <ButtonRed text='Cancel' href='/' />
                             </ButtonGroup>
                         </div>
@@ -69,4 +70,14 @@ export function PostFormField({name, placeholder}) {
             <ErrorMessage component={"p"} className="text-red-300 text-sm" name={name} />
         </div>
     );
+}
+
+export function PostFormInput({set}) {
+    return (
+        <div>
+            <input type="file" name="image" className="my-2 p-2 bg-neutral-700 text-white focus:outline-none w-full"
+            onChange={set}
+            />
+        </div>
+    )
 }

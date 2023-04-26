@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export function Page({title, children}) {
     return (
@@ -99,7 +100,7 @@ export function NotifyAsk({text, tid, callback}) {
 
 export function ButtonGroup({children}) {
   return (
-    <div className="flex flex-row gap-2 justify-end items-center">
+    <div className="flex flex-row gap-2 justify-end">
       {children}
     </div>
   )
@@ -118,7 +119,7 @@ export function Button({text, href, callback}) {
     );
 }
 
-export function ButtonSubmit({text}) {
+export function ButtonSubmit({text, disabled}) {
     return (
         <button className="
         p-2
@@ -127,7 +128,9 @@ export function ButtonSubmit({text}) {
         hover:bg-indigo-600
         hover:text-black
         "
-        type="submit">{text}</button>
+        type="submit" disabled={disabled}>{disabled ? (
+            <AiOutlineLoading3Quarters className="animate-spin" />
+        ): text}</button>
     );
 }
 
