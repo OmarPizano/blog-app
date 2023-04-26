@@ -54,7 +54,9 @@ exports.updatePost = async (req, res) => {
                 const upload = await cloudinary.uploadFile(req.files.image.tempFilePath);
                 await fs.remove(req.files.image.tempFilePath);
                 updated_post.image.url = upload.url;
-                const remove = await cloudinary.deleteFile(updated_post.image.public_id);
+                if (updated_post.image.public_id) {
+                    const remove = await cloudinary.deleteFile(updated_post.image.public_id);
+                }
                 updated_post.image.public_id = upload.public_id;
                 updated_post.save();
             }
