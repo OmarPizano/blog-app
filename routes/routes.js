@@ -2,23 +2,23 @@ const express = require('express');
 const router = express.Router();
 const blog = require('../controllers/post.controller');
 
-router.get('/', (req, res) => {
+router.get('/api', (req, res) => {
     blog.getAllPosts(req, res);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/api/:id', (req, res) => {
     blog.getPost(req, res);
 });
 
-router.post('/', (req, res) => {
+router.post('/api/', (req, res) => {
     blog.createPost(req, res);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/api/:id', (req, res) => {
     blog.deletePost(req, res);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/api/:id', (req, res) => {
     blog.updatePost(req, res);
 });
 
