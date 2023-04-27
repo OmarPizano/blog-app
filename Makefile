@@ -12,6 +12,17 @@ init:
 	bash -c "npm install && npm install --prefix client"
 	find . -type f -name ".bash_history" -exec rm {} \;
 
+build_client:
+	docker run \
+	-it \
+	--rm \
+	--volume ".:/home/node" \
+	--workdir /home/node \
+	--user $(USER_ID):$(GROUP_ID) \
+	node \
+	bash -c "npm run build --prefix client"
+	find . -type f -name ".bash_history" -exec rm {} \;
+
 start:
 	docker compose up -d
 

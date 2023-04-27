@@ -22,8 +22,8 @@ router.put('/api/:id', (req, res) => {
     blog.updatePost(req, res);
 });
 
-router.get('*', (req, res) => {
-    res.sendStatus(404);
-});
+// router.get('*', (req, res) => {
+//     res.sendStatus(404);
+// });
 
 module.exports = router;
