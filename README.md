@@ -5,8 +5,8 @@ Prototipo de un blog con el stack MERN.
 Estado:
 
 - [X] API Backend
-- [ ] Frontend *en progreso*
-- [ ] Despliegue
+- [X] Frontend
+- [X] [Despliegue](https://blog1234.herokuapp.com/)
 
 ## Modo de uso
 
@@ -18,14 +18,13 @@ git clone https://github.com/OmarPizano/blog-app
 Crear un archivo `.env`:
 ```
 MONGO_URI=mongodb://XXXX/XXXX
-BACKEND_PORT=XXXX
-FRONTEND_PORT=XXXX
+PORT=XXXX
 CLOUDINARY_NAME=XXXX
 CLOUDINARY_KEY=XXXX
 CLOUDINARY_SECRET=XXXX
 ```
 
-Instalar dependencias (genera `node_modules` de backend y frontend)
+Instalar dependencias (genera `node_modules` de cliente y servidor)
 ```bash
 # sólo la primera vez
 make init
@@ -68,6 +67,7 @@ curl 127.0.0.1 -X PUT -F image=@/path/to/new_image.png
 
 ## Changelog
 
+- **27/04/2023**: *Terminado el frontend y el despliegue en Heroku y MongoAtlas*
 - **07/04/2023**: *Agregar plantilla para el frontend*
 	- Frontend y backend separados
 	- Agregar script de inicialización
