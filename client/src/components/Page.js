@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters, AiFillFileExclamation } from "react-icons/ai";
 
 export function Page({title, children}) {
     return (
@@ -73,6 +73,17 @@ export function Container({children}) {
         <div className="p-3 flex flex-col items-center bg-neutral-800 shadow-md shadow-black">
             {children}
         </div>
+    );
+}
+
+export function Information({text}) {
+    return (
+        <Container>
+            <AiFillFileExclamation className="w-24 h-24 my-2 text-white" />
+            <div className="flex flex-col justify-center items-center">
+                <p className="text-white my-4">{text}</p>
+            </div>
+        </Container>
     );
 }
 

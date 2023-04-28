@@ -1,4 +1,4 @@
-import { Button, ButtonRed, ButtonGroup, Card, ButtonConfirmHandler } from "../components/Page";
+import { Button, ButtonRed, ButtonGroup, Card, ButtonConfirmHandler, Information } from "../components/Page";
 import { usePostContext } from "../context/PostContext";
 import { useNavigate } from "react-router-dom";
 
@@ -8,13 +8,17 @@ export function PostList({posts}) {
             <ButtonGroup>
               <Button text='New Post' href='/new' />
             </ButtonGroup>
-            <div className="grid grid-cols-2 gap-3">
-                {posts.map(post => (
-                    <Card>
-                        <Post post={post} key={post._id}/>
-                    </Card>
-                ))}
-            </div>
+            {posts.length === 0 ?
+                ( <Information text="There is nothing here yet!" /> ) :
+                (
+                    <div className="grid grid-cols-2 gap-3">
+                        {posts.map(post => (
+                            <Card>
+                                <Post post={post} key={post._id}/>
+                            </Card>
+                        ))}
+                    </div>
+                )}
         </div>
     );
 }
