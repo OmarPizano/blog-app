@@ -1,4 +1,4 @@
-require('dotenv').config({path: '../../'});
+require('dotenv');
 
 exports.MONGO_URI = process.env.MONGO_URI;
 exports.BACKEND_PORT = process.env.BACKEND_PORT;
