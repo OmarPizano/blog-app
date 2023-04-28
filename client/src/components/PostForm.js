@@ -37,6 +37,11 @@ export function PostForm() {
             })}
             onSubmit={async (values, actions) => {
                 if (params.id) {
+                    // TODO: cambiar este 'hack'. En su defecto, detectar los cambios
+                    // del formulario y sólo enviar los campos alterados.
+                    if (!(values.image instanceof File)) {
+                        delete values.image;
+                    }
                     await updatePost(params.id, values); 
                 } else {
                     await createPost(values);
