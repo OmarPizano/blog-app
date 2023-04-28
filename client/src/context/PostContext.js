@@ -37,10 +37,12 @@ export function PostProvider({ children }) {
         setPosts([...posts, res.data]);
     }
     async function deletePost(id) {
+        setLoading(true);
         const res = await apiDeletePost(id);
         if (res.status === 204) {
             setPosts(posts.filter(post => post._id !== id));
         }
+        setLoading(false);
     }
     
     // cargar los posts en el contexto
