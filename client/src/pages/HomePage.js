@@ -8,7 +8,7 @@ export function HomePage() {
     if (isLoading) return <Loading />
 
     return (
-        <Page title="Publicaciones">
+        <Page title="Poosts">
             <PostList posts={posts} />
         </Page>
     );
